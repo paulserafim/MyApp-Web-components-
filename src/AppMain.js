@@ -10,22 +10,25 @@ export class AppMain extends LitElement {
   static get properties() {
     return {
       year: { type: Number },
+      title: { type: String }
     };
   }
 
   constructor() {
     super();
     this.year = 2020;
+    this.title = "My App";
   }
   render() {
     return html`
-      <app-header title="MyApp">A</app-header>
-      <app-content @year-changed=${this._onYearChanged}>B</app-content>
+      <app-header .title=${this.title}></app-header>
+      <app-content @data-changed=${this._onDataChanged}></app-content>
       <app-footer .year=${this.year}></app-footer>
     `;
   }
-  _onYearChanged(event) {
+  _onDataChanged(event) {
     console.log('Hello', event.detail);
     this.year = event.detail.year;
+    this.title = event.detail.title;
   }
 }
